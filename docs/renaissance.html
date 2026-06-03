@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Renaissance — YouTube</title>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family:'Instrument Sans',sans-serif; background:#f5f3ef; color:#1a1a1a; }
+.wrap { max-width:1200px; margin:0 auto; padding:32px 20px; }
+header { margin-bottom:32px; }
+h1 { font-size:24px; font-weight:700; letter-spacing:-0.02em; }
+.sub { color:#6b6560; font-size:13px; font-weight:500; margin-top:2px; }
+.meta { display:flex; gap:8px; flex-wrap:wrap; margin-top:12px; }
+.meta span { background:#e8e4df; padding:3px 10px; border-radius:100px; font-size:11px; font-weight:600; color:#4a4540; }
+.legend { display:flex; gap:12px; flex-wrap:wrap; margin:16px 0 24px; padding:12px 0; border-top:1px solid #ddd8d2; border-bottom:1px solid #ddd8d2; }
+.legend-item { display:flex; align-items:center; gap:5px; font-size:11px; font-weight:500; color:#4a4540; }
+.dot { width:8px; height:8px; border-radius:50%; flex-shrink:0; }
+.nav { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:24px; flex-wrap:wrap; }
+.nav-group { display:flex; align-items:center; gap:8px; }
+.nav-btn { background:white; border:1px solid #ddd8d2; border-radius:8px; padding:8px 14px; font-size:13px; font-weight:600; color:#1a1a1a; cursor:pointer; }
+.nav-btn:hover { background:#e8e4df; }
+.nav-btn:disabled { opacity:0.3; cursor:default; }
+.week-picker { display:flex; gap:4px; flex-wrap:wrap; }
+.week-picker button { background:white; border:1px solid #ddd8d2; border-radius:6px; width:32px; height:32px; font-size:11px; font-weight:600; color:#4a4540; cursor:pointer; }
+.week-picker button.active { background:#1a1a1a; color:white; border-color:#1a1a1a; }
+.week-picker button.done { border-color:#2e7d32; color:#2e7d32; }
+.week-picker button.active.done { background:#2e7d32; border-color:#2e7d32; color:white; }
+.progress { font-size:12px; color:#6b6560; font-weight:500; }
+.progress-bar { height:4px; background:#e8e4df; border-radius:4px; margin-bottom:24px; overflow:hidden; }
+.progress-fill { height:100%; background:#2e7d32; border-radius:4px; transition:width .3s; }
+.week-view { display:none; }
+.week-view.active { display:block; }
+.day-card { background:white; border-radius:10px; padding:14px; border:1px solid #e8e4df; margin-bottom:12px; }
+.day-header { display:flex; align-items:center; gap:8px; margin-bottom:8px; padding-bottom:8px; border-bottom:2px solid; }
+.day-name { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; }
+.day-theme { font-size:11px; color:#6b6560; font-weight:500; }
+.post { display:flex; align-items:flex-start; gap:8px; padding:6px 0; border-bottom:1px solid #f0ece7; }
+.post:last-child { border-bottom:none; }
+.post-done { opacity:0.45; }
+.post-done .post-title { text-decoration:line-through; }
+.cb { width:16px; height:16px; border-radius:4px; border:2px solid #ccc; cursor:pointer; flex-shrink:0; margin-top:2px; appearance:none; -webkit-appearance:none; }
+.cb:checked { background:#2e7d32; border-color:#2e7d32; position:relative; }
+.cb:checked::after { content:'✓'; color:white; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; line-height:14px; }
+.tag { font-size:9px; font-weight:700; padding:1px 6px; border-radius:100px; white-space:nowrap; flex-shrink:0; margin-top:1px; }
+.tag-Text { background:#e8e4df; color:#4a4540; }
+.tag-Reel { background:#fce4ec; color:#c62828; }
+.tag-Carousel { background:#e3f2fd; color:#1565c0; }
+.tag-Graphic { background:#e8f5e9; color:#2e7d32; }
+.tag-Primary\ Video { background:#e3f2fd; color:#1565c0; }
+.tag-Short { background:#fce4ec; color:#c62828; }
+.tag-Restoration { background:#f3e8ff; color:#7c3aed; }
+.post-time { color:#8a847e; font-size:10px; font-weight:600; width:44px; flex-shrink:0; }
+.post-title { flex:1; font-size:12px; line-height:1.4; }
+.post-desc { font-size:11px; color:#8a847e; margin-top:1px; }
+.pin-num { font-size:10px; font-weight:700; color:#8a847e; width:28px; flex-shrink:0; }
+.pin-type { font-size:9px; font-weight:700; padding:1px 6px; border-radius:100px; white-space:nowrap; flex-shrink:0; }
+.yt-card { background:white; border-radius:10px; padding:14px; border:1px solid #e8e4df; margin-bottom:10px; }
+.yt-week { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.03em; color:#6b6560; margin-bottom:8px; }
+.yt-video { display:flex; align-items:center; gap:8px; padding:6px 0; }
+.day-badge { font-size:10px; font-weight:700; color:#1565c0; background:#e3f2fd; padding:2px 8px; border-radius:100px; white-space:nowrap; flex-shrink:0; }
+
+/* stats footer */
+.stats { margin-top:24px; padding:12px 16px; background:white; border-radius:10px; border:1px solid #e8e4df; font-size:12px; color:#4a4540; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+<h1>Renaissance — YouTube</h1>
+<div class="sub">Youtube — 6-Month Calendar</div>
+<div class="meta"><span>1-2 Videos / Week</span><span>Up to 52 Videos Total</span><span>26 Philosophy + 24 Restoration</span><span>Checkboxes Save Locally</span></div>
+<div class="legend"><div class="legend-item"><div class="dot" style="background:#1565c0"></div>Primary Video</div><div class="legend-item"><div class="dot" style="background:#c62828"></div>Short</div><div class="legend-item"><div class="dot" style="background:#7c3aed"></div>Restoration</div></div>
+</header>
+
+<div class="nav">
+<div class="nav-group">
+<button class="nav-btn" onclick="goWeek(-1)" id="prevBtn">← Prev</button>
+<button class="nav-btn" onclick="goWeek(1)" id="nextBtn">Next →</button>
+</div>
+<div class="week-picker" id="weekPicker"></div>
+<div class="progress" id="progressLabel">0 / 0 done</div>
+</div>
+<div class="progress-bar"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+
+<div id="weekContainer"></div>
+
+<div class="stats">
+<span id="statsDone">0 done</span>
+<span id="statsTotal">0 total</span>
+</div>
+</div>
+
+<script>
+const DATA = [{"week": 1, "videos": [{"title": "Stoicism 101: The Art of Inner Peace", "type": "Primary Video", "id": "renaissance-w1-primary", "day": "Monday"}, {"title": "3 Stoic Exercises for Your Morning", "type": "Short", "id": "renaissance-w1-short", "day": "Wednesday"}, {"title": "Why We Restore: The Soul of Craftsmanship", "type": "Restoration", "id": "renaissance-w1-restoration", "day": "Friday"}]}, {"week": 2, "videos": [{"title": "Meditation for People Who Can't Sit Still", "type": "Primary Video", "id": "renaissance-w2-primary", "day": "Monday"}, {"title": "A 5-Minute Breath Meditation Guide", "type": "Short", "id": "renaissance-w2-short", "day": "Wednesday"}, {"title": "The Anatomy of Patina", "type": "Restoration", "id": "renaissance-w2-restoration", "day": "Friday"}]}, {"week": 3, "videos": [{"title": "Why You Feel Empty (And What Ancient Philosophy Says About It)", "type": "Primary Video", "id": "renaissance-w3-primary", "day": "Monday"}, {"title": "3 Questions to Find Your Ikigai", "type": "Short", "id": "renaissance-w3-short", "day": "Wednesday"}, {"title": "Reading the Object: First Contact", "type": "Restoration", "id": "renaissance-w3-restoration", "day": "Friday"}]}, {"week": 4, "videos": [{"title": "Who Was Marcus Aurelius?", "type": "Primary Video", "id": "renaissance-w4-primary", "day": "Monday"}, {"title": "My Favourite Marcus Aurelius Quote", "type": "Short", "id": "renaissance-w4-short", "day": "Wednesday"}, {"title": "The Ethics of Restoration", "type": "Restoration", "id": "renaissance-w4-restoration", "day": "Friday"}]}, {"week": 5, "videos": [{"title": "The Art of Letting Go: Buddhist Detachment for Modern Life", "type": "Primary Video", "id": "renaissance-w5-primary", "day": "Monday"}, {"title": "One Thing You Can Let Go Of Today", "type": "Short", "id": "renaissance-w5-short", "day": "Wednesday"}, {"title": "How to Clean Antique Wood (Without Ruining It)", "type": "Restoration", "id": "renaissance-w5-restoration", "day": "Friday"}]}, {"week": 6, "videos": [{"title": "How to Start a Daily Journaling Practice", "type": "Primary Video", "id": "renaissance-w6-primary", "day": "Monday"}, {"title": "My Evening Journaling Routine", "type": "Short", "id": "renaissance-w6-short", "day": "Wednesday"}, {"title": "Fixing Loose Joints the Old Way", "type": "Restoration", "id": "renaissance-w6-restoration", "day": "Friday"}]}, {"week": 7, "videos": [{"title": "Why We Overthink (And How Seneca Fixed It)", "type": "Primary Video", "id": "renaissance-w7-primary", "day": "Monday"}, {"title": "The 'Worst Case Scenario' Exercise", "type": "Short", "id": "renaissance-w7-short", "day": "Wednesday"}, {"title": "French Polishing in 5 Steps", "type": "Restoration", "id": "renaissance-w7-restoration", "day": "Friday"}]}, {"week": 8, "videos": [{"title": "Epictetus: The Slave Who Became a Philosopher", "type": "Primary Video", "id": "renaissance-w8-primary", "day": "Monday"}, {"title": "The One Sentence That Changed My Life", "type": "Short", "id": "renaissance-w8-short", "day": "Wednesday"}, {"title": "Hardware Restoration: Making 100-Year-Old Brass Shine", "type": "Restoration", "id": "renaissance-w8-restoration", "day": "Friday"}]}, {"week": 9, "videos": [{"title": "Know Thyself: The Forgotten Pillar of Wisdom", "type": "Primary Video", "id": "renaissance-w9-primary", "day": "Monday"}, {"title": "10 Questions to Ask Yourself Today", "type": "Short", "id": "renaissance-w9-short", "day": "Wednesday"}, {"title": "From Barn Find to Museum Piece: The Wardrobe", "type": "Restoration", "id": "renaissance-w9-restoration", "day": "Friday"}]}, {"week": 10, "videos": [{"title": "The Power of Silence: Why You Need Quiet Every Day", "type": "Primary Video", "id": "renaissance-w10-primary", "day": "Monday"}, {"title": "A 10-Minute Silent Sit", "type": "Short", "id": "renaissance-w10-short", "day": "Wednesday"}, {"title": "The Painting Hidden Under Grime", "type": "Restoration", "id": "renaissance-w10-restoration", "day": "Friday"}]}, {"week": 11, "videos": [{"title": "Why You Compare Yourself to Others (And How to Stop)", "type": "Primary Video", "id": "renaissance-w11-primary", "day": "Monday"}, {"title": "Comparison Is a Habit — Here's How to Break It", "type": "Short", "id": "renaissance-w11-short", "day": "Wednesday"}, {"title": "Saving a 1920s Grandfather Clock", "type": "Restoration", "id": "renaissance-w11-restoration", "day": "Friday"}]}, {"week": 12, "videos": [{"title": "Lao Tzu and the Art of Flowing Through Life", "type": "Primary Video", "id": "renaissance-w12-primary", "day": "Monday"}, {"title": "What Wu Wei Looks Like in Real Life", "type": "Short", "id": "renaissance-w12-short", "day": "Wednesday"}, {"title": "The Chair That Survived a Fire", "type": "Restoration", "id": "renaissance-w12-restoration", "day": "Friday"}]}, {"week": 13, "videos": [{"title": "The Philosophy of Happiness: What the Ancients Knew", "type": "Primary Video", "id": "renaissance-w13-primary", "day": "Monday"}, {"title": "Are You Chasing Happiness or Meaning?", "type": "Short", "id": "renaissance-w13-short", "day": "Wednesday"}, {"title": "A Day in the Life of a Conservator", "type": "Restoration", "id": "renaissance-w13-restoration", "day": "Friday"}]}, {"week": 14, "videos": [{"title": "Gratitude as a Spiritual Discipline", "type": "Primary Video", "id": "renaissance-w14-primary", "day": "Monday"}, {"title": "3 Things I'm Grateful For (And Why I Write Them Down)", "type": "Short", "id": "renaissance-w14-short", "day": "Wednesday"}, {"title": "The Science of Wood Movement", "type": "Restoration", "id": "renaissance-w14-restoration", "day": "Friday"}]}, {"week": 15, "videos": [{"title": "How to Stay Calm When Everything Is Falling Apart", "type": "Primary Video", "id": "renaissance-w15-primary", "day": "Monday"}, {"title": "The 'This Too Shall Pass' Practice", "type": "Short", "id": "renaissance-w15-short", "day": "Wednesday"}, {"title": "Conversation with an Antique Dealer", "type": "Restoration", "id": "renaissance-w15-restoration", "day": "Friday"}]}, {"week": 16, "videos": [{"title": "Viktor Frankl: Finding Meaning in Suffering", "type": "Primary Video", "id": "renaissance-w16-primary", "day": "Monday"}, {"title": "Frankl's Question: 'Why Do You Get Up?", "type": "Short", "id": "renaissance-w16-short", "day": "Wednesday"}, {"title": "Tool Showcase: Planes, Chisels, and Saws That Do the Work", "type": "Restoration", "id": "renaissance-w16-restoration", "day": "Friday"}]}, {"week": 17, "videos": [{"title": "Minimalism: The Philosophical Roots of Living With Less", "type": "Primary Video", "id": "renaissance-w17-primary", "day": "Monday"}, {"title": "One Thing I Owned That I Don't Miss", "type": "Short", "id": "renaissance-w17-short", "day": "Wednesday"}, {"title": "Why We Restore: The Soul of Craftsmanship", "type": "Restoration", "id": "renaissance-w17-restoration", "day": "Friday"}]}, {"week": 18, "videos": [{"title": "Walking as Meditation: A Complete Guide", "type": "Primary Video", "id": "renaissance-w18-primary", "day": "Monday"}, {"title": "A Guided Walking Meditation (Audio Style)", "type": "Short", "id": "renaissance-w18-short", "day": "Wednesday"}, {"title": "The Anatomy of Patina", "type": "Restoration", "id": "renaissance-w18-restoration", "day": "Friday"}]}, {"week": 19, "videos": [{"title": "Slow Living in a Fast World: What Philosophy Teaches Us", "type": "Primary Video", "id": "renaissance-w19-primary", "day": "Monday"}, {"title": "How I Slowed Down Without Dropping Everything", "type": "Short", "id": "renaissance-w19-short", "day": "Wednesday"}, {"title": "Reading the Object: First Contact", "type": "Restoration", "id": "renaissance-w19-restoration", "day": "Friday"}]}, {"week": 20, "videos": [{"title": "Alan Watts: The Man Who Made Philosophy Playful", "type": "Primary Video", "id": "renaissance-w20-primary", "day": "Monday"}, {"title": "My Favourite Alan Watts Recording", "type": "Short", "id": "renaissance-w20-short", "day": "Wednesday"}, {"title": "The Ethics of Restoration", "type": "Restoration", "id": "renaissance-w20-restoration", "day": "Friday"}]}, {"week": 21, "videos": [{"title": "Memento Mori: Remember You Will Die", "type": "Primary Video", "id": "renaissance-w21-primary", "day": "Monday"}, {"title": "What Would You Do If You Had One Year Left?", "type": "Short", "id": "renaissance-w21-short", "day": "Wednesday"}, {"title": "How to Clean Antique Wood (Without Ruining It)", "type": "Restoration", "id": "renaissance-w21-restoration", "day": "Friday"}]}, {"week": 22, "videos": [{"title": "The Art of Being Present: Mindfulness Beyond the Basics", "type": "Primary Video", "id": "renaissance-w22-primary", "day": "Monday"}, {"title": "A 5-Minute 'Just Watching' Practice", "type": "Short", "id": "renaissance-w22-short", "day": "Wednesday"}, {"title": "Fixing Loose Joints the Old Way", "type": "Restoration", "id": "renaissance-w22-restoration", "day": "Friday"}]}, {"week": 23, "videos": [{"title": "Why You Need a Personal Philosophy", "type": "Primary Video", "id": "renaissance-w23-primary", "day": "Monday"}, {"title": "My Personal Philosophy in 5 Bullet Points", "type": "Short", "id": "renaissance-w23-short", "day": "Wednesday"}, {"title": "French Polishing in 5 Steps", "type": "Restoration", "id": "renaissance-w23-restoration", "day": "Friday"}]}, {"week": 24, "videos": [{"title": "Thich Nhat Hanh: The Monk Who Taught the World to Breathe", "type": "Primary Video", "id": "renaissance-w24-primary", "day": "Monday"}, {"title": "How I Practice 'Mindful Dishwashing", "type": "Short", "id": "renaissance-w24-short", "day": "Wednesday"}, {"title": "Hardware Restoration: Making 100-Year-Old Brass Shine", "type": "Restoration", "id": "renaissance-w24-restoration", "day": "Friday"}]}, {"week": 25, "videos": [{"title": "6 Months of Practice: What I Learned", "type": "Primary Video", "id": "renaissance-w25-primary", "day": "Monday"}, {"title": "My #1 Takeaway From This Journey", "type": "Short", "id": "renaissance-w25-short", "day": "Wednesday"}]}, {"week": 26, "videos": [{"title": "A Life Worth Living: Where Do We Go From Here?", "type": "Primary Video", "id": "renaissance-w26-primary", "day": "Monday"}, {"title": "Thank You — A Short Message to This Community", "type": "Short", "id": "renaissance-w26-short", "day": "Wednesday"}]}];
+const SITE_ID = "renaissance";
+const STORAGE_KEY = "sc_check_" + SITE_ID;
+
+let saved = {};
+try { const r = localStorage.getItem(STORAGE_KEY); if (r) saved = JSON.parse(r); } catch(e) {}
+
+let totalItems = 0;
+DATA.forEach(w => {
+    if (w.days) {
+        Object.values(w.days).forEach(d => {
+            if (d.posts) totalItems += d.posts.length;
+            else if (d.pins) totalItems += d.pins.length;
+        });
+    } else if (w.videos) {
+        totalItems += w.videos.length;
+    }
+});
+
+function getId(item) { return item.id; }
+
+function loadCheck(id) { return saved[id] || false; }
+
+function saveCheck(id, val) { saved[id] = val; localStorage.setItem(STORAGE_KEY, JSON.stringify(saved)); updateAll(); }
+
+function renderWeek(wi) {
+    const w = DATA[wi];
+    if (!w) return;
+    const c = document.getElementById('weekContainer');
+    let h = '';
+
+    if (w.days) {
+        for (const [dn, dd] of Object.entries(w.days)) {
+            const color = dd.color || '#6366f1';
+            const theme = dd.theme || dd.focus || '';
+            h += '<div class="day-card"><div class="day-header" style="border-color:'+color+'">';
+            h += '<div class="day-name" style="color:'+color+'">'+dn+'</div>';
+            if (theme) h += '<div class="day-theme">'+theme+'</div>';
+            h += '</div>';
+
+            const items = dd.posts || dd.pins || [];
+            items.forEach(item => {
+                const cid = getId(item);
+                const checked = loadCheck(cid);
+                const doneClass = checked ? ' post-done' : '';
+
+                if (item.time) {
+                    h += '<div class="post'+doneClass+'">';
+                    h += '<input type="checkbox" class="cb" id="cb-'+cid+'" '+(checked?'checked':'')+' onchange="saveCheck(\''+cid+'\',this.checked)">';
+                    h += '<span class="post-time">'+item.time+'</span>';
+                    h += '<span class="tag tag-'+item.type+'">'+item.type+'</span>';
+                    h += '<div><div class="post-title">'+item.title+'</div>';
+                    if (item.desc) h += '<div class="post-desc">'+item.desc+'</div>';
+                    h += '</div></div>';
+                } else if (item.num) {
+                    h += '<div class="post'+doneClass+'">';
+                    h += '<input type="checkbox" class="cb" id="cb-'+cid+'" '+(checked?'checked':'')+' onchange="saveCheck(\''+cid+'\',this.checked)">';
+                    h += '<div class="pin-num">#'+item.num+'</div>';
+                    h += '<div style="flex:1"><div class="post-title">'+item.title+'</div></div>';
+                    h += '<span class="tag tag-'+item.type_tag+' pin-type">'+item.type_name+'</span>';
+                    h += '</div>';
+                }
+            });
+            h += '</div>';
+        }
+    } else if (w.videos) {
+        w.videos.forEach(v => {
+            const cid = getId(v);
+            const checked = loadCheck(cid);
+            const doneClass = checked ? ' post-done' : '';
+            h += '<div class="yt-card"><div class="yt-video'+doneClass+'">';
+            h += '<input type="checkbox" class="cb" id="cb-'+cid+'" '+(checked?'checked':'')+' onchange="saveCheck(\''+cid+'\',this.checked)">';
+            h += '<span class="tag tag-'+v.type.replace(' ','\\ ')+'">'+v.type+'</span>';
+            if (v.day) h += '<span class="day-badge">'+v.day+'</span>';
+            h += '<div class="post-title">'+v.title+'</div>';
+            h += '</div></div>';
+        });
+    }
+
+    c.innerHTML = h;
+}
+
+function updateAll() {
+    let done = 0, total = 0;
+    DATA.forEach(w => {
+        if (w.days) {
+            Object.values(w.days).forEach(d => {
+                const items = d.posts || d.pins || [];
+                items.forEach(item => { total++; if (loadCheck(getId(item))) done++; });
+            });
+        } else if (w.videos) {
+            w.videos.forEach(v => { total++; if (loadCheck(getId(v))) done++; });
+        }
+    });
+
+    document.getElementById('progressLabel').textContent = done + ' / ' + total + ' done';
+    document.getElementById('progressFill').style.width = total ? (done/total*100)+'%' : '0%';
+    document.getElementById('statsDone').textContent = done + ' done';
+    document.getElementById('statsTotal').textContent = total + ' total';
+
+    // Update week picker dots
+    document.querySelectorAll('.week-picker button').forEach((btn, i) => {
+        if (i >= DATA.length) return;
+        let wDone = 0, wTotal = 0;
+        const w = DATA[i];
+        if (w.days) {
+            Object.values(w.days).forEach(d => {
+                const items = d.posts || d.pins || [];
+                items.forEach(item => { wTotal++; if (loadCheck(getId(item))) wDone++; });
+            });
+        } else if (w.videos) {
+            w.videos.forEach(v => { wTotal++; if (loadCheck(getId(v))) wDone++; });
+        }
+        btn.classList.toggle('done', wDone > 0 && wDone === wTotal);
+    });
+}
+
+let currentWeek = 0;
+
+function goWeek(delta) {
+    const nw = currentWeek + delta;
+    if (nw < 0 || nw >= DATA.length) return;
+    showWeek(nw);
+}
+
+function showWeek(wi) {
+    currentWeek = wi;
+    renderWeek(wi);
+
+    document.querySelectorAll('.week-picker button').forEach((btn, i) => {
+        btn.classList.toggle('active', i === wi);
+    });
+    document.getElementById('prevBtn').disabled = wi === 0;
+    document.getElementById('nextBtn').disabled = wi === DATA.length - 1;
+
+    // Scroll to top
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+function buildPicker() {
+    const p = document.getElementById('weekPicker');
+    for (let i = 0; i < DATA.length; i++) {
+        const btn = document.createElement('button');
+        btn.textContent = i + 1;
+        btn.onclick = () => showWeek(i);
+        p.appendChild(btn);
+    }
+}
+
+buildPicker();
+showWeek(0);
+updateAll();
+</script>
+</body>
+</html>
