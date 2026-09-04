@@ -49,6 +49,9 @@
   ]
 }
 </script>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -83,8 +86,8 @@ a{color:inherit;text-decoration:none}
 .nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,border-color .4s,box-shadow .4s;background:transparent;border-bottom:1px solid transparent}
 .nav.scrolled{background:rgba(10,22,40,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,78,.1);box-shadow:0 2px 40px rgba(0,0,0,.3)}
 .nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;height:76px;display:flex;align-items:center;justify-content:space-between}
-.nav-brand{display:flex;align-items:center;gap:10px;font-family:var(--font-serif);font-weight:600;font-size:1.05rem;color:var(--cream);letter-spacing:.01em}
-.nav-brand svg{width:26px;height:26px;flex-shrink:0;opacity:.8}
+.nav-brand{display:flex;align-items:center;font-family:var(--font-serif);font-weight:600;font-size:1.05rem;color:var(--cream);letter-spacing:.01em;transition:color .3s}
+.nav-brand:hover{color:var(--gold)}
 .nav-links{display:flex;align-items:center;gap:36px}
 .nav-links a{font-size:.875rem;font-weight:500;color:rgba(248,246,240,.6);transition:color .3s}
 .nav-links a:hover{color:var(--cream)}
@@ -274,11 +277,6 @@ a{color:inherit;text-decoration:none}
 <nav class="nav" id="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="#" class="nav-brand" aria-label="Renaissance of the Poor Soul — Home">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-        <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
-        <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
-        <path d="M9 7h6M9 11h4"/>
-      </svg>
       <span>Renaissance of the Poor Soul</span>
     </a>
     <div class="nav-links" id="navLinks">
