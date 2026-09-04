@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Price Tag — Renaissance of the Poor Soul</title>
+<style>
+  :root{ --gold:#c9a85c; --ink:#1f1c16; --cream:#f8f3e8; }
+  *{ box-sizing:border-box; }
+  body{ margin:0; background:#cfc9bc; font-family: Georgia, 'Palatino Linotype', serif; }
+  /* A4 sheet with a grid of price tags for cutting */
+  .sheet{ width:210mm; margin:0 auto; padding:12mm; display:flex; flex-wrap:wrap; gap:6mm; }
+  .tag{ width:78mm; height:52mm; background:var(--ink); color:var(--cream);
+        border-radius:2mm; padding:5mm 6mm; display:flex; flex-direction:column;
+        justify-content:space-between; box-shadow:0 1mm 3mm rgba(0,0,0,.25); }
+  .tag .brand{ font-size:6.4pt; letter-spacing:.28em; color:var(--gold); text-transform:uppercase; }
+  .tag .title{ font-size:13.5pt; font-weight:700; line-height:1.15; margin:1.5mm 0 0; }
+  .tag .sub{ font-size:7pt; font-style:italic; color:rgba(248,243,232,.75); margin-top:.8mm; }
+  .tag .author{ font-size:7.5pt; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); margin-top:1.5mm; }
+  .tag .bottom{ display:flex; justify-content:space-between; align-items:flex-end; margin-top:3mm; }
+  .tag .price{ font-size:22pt; font-weight:700; color:var(--cream); }
+  .tag .price small{ font-size:10pt; color:var(--gold); margin-left:1mm; }
+  .tag .isbn{ font-size:6pt; letter-spacing:.06em; color:rgba(248,243,232,.6); text-align:right; }
+  @page{ size: A4; margin:0; }
+  @media print{ body{ background:#fff; } .sheet{ padding:0; gap:4mm; }
+    .tag{ box-shadow:none; break-inside:avoid; } }
+</style>
+</head>
+<body>
+<div class="sheet">
+  <!-- repeat the tag 6x per sheet (2 columns x 3 rows) for cutting -->
+  <div class="tag">
+    <div>
+      <div class="brand">Liviyo</div>
+      <div class="title">Renaissance of the Poor Soul</div>
+      <div class="sub">A journey through the many faces of the human spirit</div>
+      <div class="author">Halalisani Ngema</div>
+    </div>
+    <div class="bottom">
+      <div class="price">R250<small>.00</small></div>
+      <div class="isbn">ISBN 978-1-0492-8328-9</div>
+    </div>
+  </div>
+  <div class="tag"><div><div class="brand">Liviyo</div>
+      <div class="title">Renaissance of the Poor Soul</div>
+      <div class="sub">A journey through the many faces of the human spirit</div>
+      <div class="author">Halalisani Ngema</div></div>
+    <div class="bottom"><div class="price">R250<small>.00</small></div>
+      <div class="isbn">ISBN 978-1-0492-8328-9</div></div></div>
+  <div class="tag"><div><div class="brand">Liviyo</div>
+      <div class="title">Renaissance of the Poor Soul</div>
+      <div class="sub">A journey through the many faces of the human spirit</div>
+      <div class="author">Halalisani Ngema</div></div>
+    <div class="bottom"><div class="price">R250<small>.00</small></div>
+      <div class="isbn">ISBN 978-1-0492-8328-9</div></div></div>
+  <div class="tag"><div><div class="brand">Liviyo</div>
+      <div class="title">Renaissance of the Poor Soul</div>
+      <div class="sub">A journey through the many faces of the human spirit</div>
+      <div class="author">Halalisani Ngema</div></div>
+    <div class="bottom"><div class="price">R250<small>.00</small></div>
+      <div class="isbn">ISBN 978-1-0492-8328-9</div></div></div>
+  <div class="tag"><div><div class="brand">Liviyo</div>
+      <div class="title">Renaissance of the Poor Soul</div>
+      <div class="sub">A journey through the many faces of the human spirit</div>
+      <div class="author">Halalisani Ngema</div></div>
+    <div class="bottom"><div class="price">R250<small>.00</small></div>
+      <div class="isbn">ISBN 978-1-0492-8328-9</div></div></div>
+  <div class="tag"><div><div class="brand">Liviyo</div>
+      <div class="title">Renaissance of the Poor Soul</div>
+      <div class="sub">A journey through the many faces of the human spirit</div>
+      <div class="author">Halalisani Ngema</div></div>
+    <div class="bottom"><div class="price">R250<small>.00</small></div>
+      <div class="isbn">ISBN 978-1-0492-8328-9</div></div></div>
+</div>
+</body>
+</html>
