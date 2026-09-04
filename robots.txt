@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+Disallow: /old_menu_scripts/
+Disallow: /page-design-skill/
+Disallow: /tools/
+
+Sitemap: https://renaissance.liviyo.co.za/sitemap.xml

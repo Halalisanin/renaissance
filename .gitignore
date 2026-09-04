@@ -1,0 +1,18 @@
+# Private / for-sale book content — NEVER commit (Amazon for-sale book)
+Renaissance_of_the_Poor_Soul/
+
+# Archived book drafts & production material
+old_menu_scripts/
+
+# Local-only design preview mockups (contain full private book text)
+book.html
+preview-*.html
+book_preview.html
+book_landing.html
+page-design-skill/
+
+# Existing
+animation_renaissance/
+
+__pycache__/
+*.pyc
