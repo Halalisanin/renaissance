@@ -194,10 +194,9 @@ a{color:inherit;text-decoration:none}
 .author{background:var(--cream)}
 .author-inner{max-width:var(--max-w);margin:0 auto;display:grid;grid-template-columns:300px 1fr;gap:80px;align-items:start}
 .author-sidebar{text-align:center}
-.author-avatar{width:260px;height:320px;background:var(--cream-3);border-radius:16px;display:flex;align-items:center;justify-content:center;margin:0 auto 20px;overflow:hidden;border:1px solid rgba(30,30,30,.06)}
+.author-avatar{width:200px;height:200px;background:var(--cream-3);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;overflow:hidden;border:3px solid rgba(201,169,78,.2);box-shadow:0 8px 32px rgba(0,0,0,.08)}
 .author-avatar img{width:100%;height:100%;object-fit:cover}
-.author-avatar-placeholder{font-family:var(--font-serif);font-size:3.2rem;color:var(--muted-light);opacity:.35}
-.author-label{font-size:.82rem;color:var(--muted)}
+.author-caption{font-size:.82rem;color:var(--muted);font-style:italic;margin-bottom:4px}
 .author-bio p{font-size:.95rem;color:var(--ink-soft);line-height:1.85;margin-bottom:20px}
 .author-bio p:last-child{margin-bottom:0}
 
@@ -260,7 +259,7 @@ a{color:inherit;text-decoration:none}
   .newsletter-form{flex-direction:column;border-radius:8px}
   .newsletter-input{border-right:1px solid rgba(248,246,240,.1);border-radius:8px 8px 0 0}
   .newsletter-btn{border-radius:0 0 8px 8px}
-  .author-avatar{width:200px;height:240px}
+  .author-avatar{width:160px;height:160px}
   .section{padding:80px 20px}
   .hero{padding:100px 20px 60px}
   .btn-gold,.btn-ghost{padding:16px 32px;font-size:.9rem}
@@ -434,10 +433,10 @@ a{color:inherit;text-decoration:none}
 <section class="author section" id="author">
   <div class="author-inner">
     <div class="author-sidebar" data-animate>
-      <div class="author-avatar" id="authorAvatar">
-        <div class="author-avatar-placeholder">HN</div>
+      <div class="author-avatar">
+        <img src="assets/images/author_circle.jpg" alt="Halalisani – author of Renaissance of the Poor Soul" width="200" height="200" loading="lazy">
       </div>
-      <p class="author-label">Halalisani Ngema</p>
+      <p class="author-caption">Halalisani – author</p>
     </div>
     <div data-animate="delay-2">
       <p class="section-eyebrow">About the Author</p>
