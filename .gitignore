@@ -16,3 +16,7 @@ animation_renaissance/
 
 __pycache__/
 *.pyc
+
+# Tooling / temp
+.DS_Store
+*.log
