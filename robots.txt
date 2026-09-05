@@ -5,4 +5,39 @@ Disallow: /old_menu_scripts/
 Disallow: /page-design-skill/
 Disallow: /tools/
 
+# AI search & training crawlers — explicitly allowed
+User-agent: GPTBot
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+# Bing & search engines
+User-agent: Bingbot
+Allow: /
+
+User-agent: bingbot-news
+Allow: /
+
 Sitemap: https://renaissance.liviyo.co.za/sitemap.xml
