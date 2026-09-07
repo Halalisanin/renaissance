@@ -17,8 +17,9 @@ COVER_DIR = os.path.join(ROOT, 'book_design')
 PRINT = os.path.join(ROOT, 'print')
 CHROME = '/home/win/.cache/ms-playwright/chromium-1208/chrome-linux64/chrome'
 
-ISBN_PRINT = '978-1-0492-8328-9'
-ISBN_RAW = '9781049283289'
+ISBN_PRINT = '978-1-0492-8329-6'
+ISBN_RAW = '9781049283296'
+ISBN_LULU = os.path.join(ROOT, 'ISBN_LULU', '978-1-0492-8329-6.png')
 TITLE = 'Renaissance of the Poor Soul'
 SUBTITLE = 'A journey through the many faces of the human spirit'
 AUTHOR = 'Halalisani Ngema'
@@ -103,13 +104,11 @@ def build(cid, cfile):
     # white quiet zone behind barcode
     qz=14
     draw.rectangle([bx0-qz,by0-qz,bx0+bbw+qz,by0+bbh+qz+46], fill=(250,250,248))
-    # real EAN-13 barcode
-    tmp=os.path.join(tempfile.mkdtemp(),'bc.png')
-    barcode_ean13.render(ISBN_RAW, tmp, 1500, 900, 300)
-    bc=Image.open(tmp).convert('L')
+    # real EAN-13 barcode (Lulu-provided image for ISBN 978-1-0492-8329-6)
+    bc=Image.open(ISBN_LULU).convert('L')
     # crop tight to bars + digits
     px=bc.load(); w,h=bc.size
-    xs=[x for x in range(w) if any(px[x,y]<128 for y in range(80,820))]
+    xs=[x for x in range(w) if any(px[x,y]<128 for y in range(0,h))]
     ys=[y for y in range(h) if any(px[x,y]<128 for x in range(0,w,3))]
     x0,x1,y0,y1=min(xs),max(xs),min(ys),max(ys)
     bc=bc.crop((x0,y0,x1+1,y1+1))
@@ -122,9 +121,9 @@ def build(cid, cfile):
     draw.rectangle([bx0,by0+bbh,bx0+bbw,by0+bbh+6], fill=(15,15,15))
     draw.text((cx, by0+bbh+40), ISBN_PRINT, font=font(30), fill=(25,25,25), anchor='ma')
     y=by0+bbh+120
-    draw.text((cx, int(H-90)), 'Liviyo', font=font(30), fill=(215,205,185), anchor='ma')
-    draw.text((bx0, 60), 'RENAISSANCE OF THE POOR SOUL', font=font(26), fill=(215,205,185), anchor='la')
-    draw.text((bx0, 110), AUTHOR, font=font(26), fill=(215,205,185), anchor='la')
+    draw.text((cx, int(H-90)), 'Liviyo Press', font=font(22), fill=(215,205,185), anchor='ma')
+    draw.text((cx, 60), 'Renaissance of the poor soul', font=font(26), fill=(215,205,185), anchor='ma')
+    draw.text((cx, 110), AUTHOR, font=font(26), fill=(215,205,185), anchor='ma')
 
     # ---- SPINE ----
     # solid; optionally a thin rule off the front. Keep clean for thin spine.
