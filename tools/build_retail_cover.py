@@ -23,8 +23,9 @@ COVER_DIR=os.path.join(ROOT,'book_design')
 OUT_ROOT=os.path.join(ROOT,'book_formats','print')
 FONT_DIR='/usr/share/fonts/truetype/dejavu'
 
-ISBN='978-1-0492-8328-9'
-ISBN_RAW='9781049283289'
+ISBN='978-1-0492-8329-6'
+ISBN_RAW='9781049283296'
+ISBN_LULU=os.path.join(ROOT,'ISBN_LULU','978-1-0492-8329-6.png')
 TITLE='Renaissance of the Poor Soul'
 SUBTITLE='A journey through the many faces of the human spirit'
 AUTHOR='Halalisani Ngema'
@@ -73,15 +74,13 @@ def back_bg(cfile):
     return bg
 
 def barcode_image():
-    """Render EAN-13 at print size (1.5in x 1.0in @300dpi => 450x300) with digits."""
+    """Lulu-provided EAN-13 barcode image (ISBN 978-1-0492-8329-6) at print size."""
     W,H=450,300
-    tmp=os.path.join(tempfile.mkdtemp(),'bc.png')
-    barcode_ean13.render(ISBN_RAW, tmp, 1500, 900, 300)
-    im=Image.open(tmp).convert('L')
+    im=Image.open(ISBN_LULU).convert('L')
     # crop tight to bars + digits, then place at target size
     # find content bbox
     px=im.load(); w,h=im.size
-    xs=[x for x in range(w) if any(px[x,y]<128 for y in range(80,820))]
+    xs=[x for x in range(w) if any(px[x,y]<128 for y in range(0,h))]
     ys=[y for y in range(h) if any(px[x,y]<128 for x in range(0,w,3))]
     x0,x1,y0,y1=min(xs),max(xs),min(ys),max(ys)
     crop=im.crop((x0,y0,x1+1,y1+1))
