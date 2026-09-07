@@ -2,15 +2,16 @@
 """Physical-retail wraparound cover generator for all 5 cover designs.
 
 For each cover builds (300 DPI):
-  - BACK panel: blurb + barcode + R250.00 price + legal text, matched to front palette.
+  - BACK panel: blurb + barcode + legal text, matched to front palette.
   - SPINE     : width = interior_pages * 0.0025in, colored to match.
   - FRONT panel: full-bleed source cover art.
 Then flattens BACK+SPINE+FRONT into a single print-ready PDF and PNG:
   Renaissance_of_the_Poor_Soul/book_formats/print/coverX/cover/cover_final.pdf
 also cover_final.png.
 
-Back-cover layout (bottom right): EAN-13 barcode ~1.5in x 1in, R250.00 price above it,
+Back-cover layout (bottom right): EAN-13 barcode ~1.5in x 1in,
 legal text (ISBN / Printed in South Africa / copyright) beneath.
+No price is printed on the cover.
 """
 import os, subprocess, re, sys, tempfile
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__))))
@@ -24,7 +25,6 @@ FONT_DIR='/usr/share/fonts/truetype/dejavu'
 
 ISBN='978-1-0492-8328-9'
 ISBN_RAW='9781049283289'
-PRICE='R250.00'
 TITLE='Renaissance of the Poor Soul'
 SUBTITLE='A journey through the many faces of the human spirit'
 AUTHOR='Halalisani Ngema'
@@ -135,7 +135,7 @@ def make_back(bg, cfile):
         dr.text((W//2, y), ln, font=serif(fs), fill=CREAM, anchor='ma'); y+=int(fs*1.62)
         if ln.strip()=='' : y+=int(fs*0.6)
 
-    # ---- bottom-right region: price + barcode ----
+    # ---- bottom-right region: barcode ----
     bc_w, bc_h = 450, 300         # 1.5in x 1.0in @300dpi
     pad=70
     bx0 = W - bc_w - pad          # right margin
@@ -144,12 +144,6 @@ def make_back(bg, cfile):
     panel=Image.new('RGB',(bc_w+30,bc_h+30),(250,250,247))
     panel.paste(bc, (15,15))
     img.paste(panel,(bx0-15, H - bc_h - pad*2 - 15))
-    # price directly above barcode, right-aligned to barcode
-    price_y = H - bc_h - pad*2 - 40 - 130
-    pfont=serifb(110)
-    dr.text((W-pad, price_y), PRICE, font=pfont, fill=GOLD, anchor='rm')
-    # small 'retail price' label above price
-    dr.text((W-pad, price_y-80), 'SHELF PRICE', font=serif(26), fill=SOFT, anchor='rm')
 
     # ---- legal text block (bottom-left, and under barcode) ----
     legal_y = H - pad*2 - 60
