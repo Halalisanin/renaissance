@@ -4,10 +4,13 @@
 Layout (300 DPI), left to right: BACK panel + SPINE + FRONT panel.
   - Front : source cover (1587x2245) upscaled to full-bleed 6x9in (1800x2700px).
   - Spine : width = interior_pages * 0.0025 in, solid color sampled from cover.
-  - Back  : solid sampled background + blurb + title/author + PRINT ISBN + barcode box.
+  - Back  : solid sampled background + blurb + title/author + PRINT ISBN + EAN-13 barcode.
 Output: print/coverX/cover/cover.pdf  (single full-bleed PDF, no trim marks)
+No price is printed on the cover.
 """
-import os, re, subprocess
+import os, re, subprocess, sys, tempfile
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+import barcode_ean13
 
 ROOT = '/home/win/liviyo_pc/job/websites/liviyo_capital/working_sites/jobs_renaissance/Renaissance_of_the_Poor_Soul'
 COVER_DIR = os.path.join(ROOT, 'book_design')
@@ -15,6 +18,7 @@ PRINT = os.path.join(ROOT, 'print')
 CHROME = '/home/win/.cache/ms-playwright/chromium-1208/chrome-linux64/chrome'
 
 ISBN_PRINT = '978-1-0492-8328-9'
+ISBN_RAW = '9781049283289'
 TITLE = 'Renaissance of the Poor Soul'
 SUBTITLE = 'A journey through the many faces of the human spirit'
 AUTHOR = 'Halalisani Ngema'
@@ -93,17 +97,28 @@ def build(cid, cfile):
     fs2=34
     draw.text((cx,y), SUBTITLE, font=font(34), fill=(215,205,185), anchor='ma'); y+=70
     draw.text((cx,y), AUTHOR.upper(), font=font(28), fill=gold, anchor='ma'); y+=120
-    # barcode box + ISBN (white quiet-zone required for scannability)
+    # EAN-13 barcode + ISBN (white quiet-zone required for scannability)
     bbw,bbh=int(bw0*0.42), int(bw0*0.20)
     bx0,by0=cx-bbw//2, y
     # white quiet zone behind barcode
     qz=14
     draw.rectangle([bx0-qz,by0-qz,bx0+bbw+qz,by0+bbh+qz+46], fill=(250,250,248))
-    nbars=20
-    for i in range(nbars):
-        if i%2==0:
-            x1=bx0+i*(bbw//nbars)
-            draw.rectangle([x1, by0, x1+bbw//nbars, by0+bbh], fill=(15,15,15))
+    # real EAN-13 barcode
+    tmp=os.path.join(tempfile.mkdtemp(),'bc.png')
+    barcode_ean13.render(ISBN_RAW, tmp, 1500, 900, 300)
+    bc=Image.open(tmp).convert('L')
+    # crop tight to bars + digits
+    px=bc.load(); w,h=bc.size
+    xs=[x for x in range(w) if any(px[x,y]<128 for y in range(80,820))]
+    ys=[y for y in range(h) if any(px[x,y]<128 for x in range(0,w,3))]
+    x0,x1,y0,y1=min(xs),max(xs),min(ys),max(ys)
+    bc=bc.crop((x0,y0,x1+1,y1+1))
+    scale=bbw/bc.width
+    nh=int(bc.height*scale)
+    if nh>bbh:
+        scale=bbh/bc.height; nh=bbh; bbw=int(bc.width*scale)
+    bc=bc.resize((bbw,nh),Image.LANCZOS)
+    canvas.paste(bc,(bx0,by0+(bbh-nh)//2))
     draw.rectangle([bx0,by0+bbh,bx0+bbw,by0+bbh+6], fill=(15,15,15))
     draw.text((cx, by0+bbh+40), ISBN_PRINT, font=font(30), fill=(25,25,25), anchor='ma')
     y=by0+bbh+120
