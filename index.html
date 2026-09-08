@@ -179,8 +179,8 @@ a{color:inherit;text-decoration:none}
 .buy .section-inner{width:100%}
 .buy-header{text-align:center;margin-bottom:24px}
 .buy-heading{font-family:var(--font-serif);font-size:1rem;font-weight:600;color:var(--ink);margin-bottom:8px}
-.buy-grid{display:grid;grid-template-columns:repeat(3,minmax(0,380px));justify-content:center;gap:30px;margin-bottom:20px}
-.buy-card{background:#fff;border-radius:12px;padding:20px;display:flex;flex-direction:column;width:100%;max-width:380px;border:1px solid rgba(30,30,30,.05);transition:box-shadow .3s,transform .3s}
+.buy-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));justify-content:center;gap:30px;margin-bottom:20px}
+.buy-card{background:#fff;border-radius:12px;padding:24px;display:flex;flex-direction:column;width:100%;max-width:380px;border:1px solid rgba(30,30,30,.05);transition:box-shadow .3s,transform .3s}
 .buy-card:hover{box-shadow:0 12px 40px rgba(0,0,0,.08);transform:translateY(-3px)}
 .buy-card-title{font-family:var(--font-serif);font-weight:600;font-size:1.1rem;color:var(--navy);margin-bottom:6px}
 .buy-card-desc{font-size:.85rem;color:var(--muted);line-height:1.6;margin-bottom:20px;flex:1}
@@ -264,7 +264,6 @@ a{color:inherit;text-decoration:none}
   .preview-inner{grid-template-columns:1fr}
   .preview-sticky{position:static}
   .preview-article{margin-top:40px}
-  .buy-grid{grid-template-columns:1fr 1fr}
   .nav-links{display:none}
   .nav-links.active{display:flex;flex-direction:column;position:absolute;top:76px;left:0;right:0;background:rgba(10,22,40,.97);backdrop-filter:blur(20px);padding:28px;gap:20px;border-bottom:1px solid rgba(201,169,78,.1)}
   .nav-mobile-toggle{display:block}
@@ -272,7 +271,6 @@ a{color:inherit;text-decoration:none}
 }
 @media(max-width:600px){
   .buy{height:auto;min-height:calc(100vh - 80px)}
-  .buy-grid{grid-template-columns:1fr}
   .footer-top{flex-direction:column}
   .footer-bottom{flex-direction:column;text-align:center}
   .newsletter-form{flex-direction:column;border-radius:8px}
@@ -283,6 +281,12 @@ a{color:inherit;text-decoration:none}
   .hero{padding:100px 20px 60px}
   .btn-gold,.btn-ghost{padding:16px 32px;font-size:.9rem}
   .nav-cta{padding:12px 20px}
+}
+@media(max-width:768px){
+  .buy-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  .buy-grid{grid-template-columns:1fr}
 }
 @media(max-width:380px){
   .hero-title{font-size:2.2rem}
