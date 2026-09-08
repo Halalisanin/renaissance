@@ -12,7 +12,7 @@
 <body>
 <main class="checkout">
   <div class="checkout-grid">
-    <img id="selected-cover-preview" class="checkout-cover" src="assets/images/cover.jpg" alt="Renaissance of the Poor Soul book cover">
+    <img id="selected-cover-preview" class="checkout-cover" src="assets/direct_book/thumbnails/cover1.jpg" alt="Renaissance of the Poor Soul book cover, Cover 1">
     <section class="checkout-panel" aria-labelledby="checkout-title">
       <p class="section-eyebrow">Secure checkout</p>
       <h1 id="checkout-title">Renaissance of the Poor Soul</h1>
@@ -22,7 +22,7 @@
       <form action="https://www.payfast.co.za/eng/process" method="post" id="payfast-form">
         <p><strong>Choose your cover</strong></p>
         <div class="cover-options" role="radiogroup" aria-label="Choose your cover">
-          <button type="button" class="cover-option selected" data-cover="cover1" data-image="assets/images/cover.jpg" role="radio" aria-checked="true"><img src="assets/images/cover.jpg" alt="Cover 1"><span>Cover 1</span></button>
+          <button type="button" class="cover-option selected" data-cover="cover1" data-image="assets/direct_book/thumbnails/cover1.jpg" role="radio" aria-checked="true"><img src="assets/direct_book/thumbnails/cover1.jpg" alt="Cover 1"><span>Cover 1</span></button>
           <button type="button" class="cover-option" data-cover="cover2" data-image="assets/direct_book/thumbnails/cover2.jpg" role="radio" aria-checked="false"><img src="assets/direct_book/thumbnails/cover2.jpg" alt="Cover 2"><span>Cover 2</span></button>
           <button type="button" class="cover-option" data-cover="cover3" data-image="assets/direct_book/thumbnails/cover3.jpg" role="radio" aria-checked="false"><img src="assets/direct_book/thumbnails/cover3.jpg" alt="Cover 3"><span>Cover 3</span></button>
           <button type="button" class="cover-option" data-cover="cover4" data-image="assets/direct_book/thumbnails/cover4.jpg" role="radio" aria-checked="false"><img src="assets/direct_book/thumbnails/cover4.jpg" alt="Cover 4"><span>Cover 4</span></button>
@@ -38,6 +38,7 @@
         <input type="hidden" name="notify_url" value="https://renaissance.liviyo.co.za/notify.php">
         <input type="hidden" name="m_payment_id" id="payment-id">
         <input type="hidden" name="custom_str1" id="cover-selected" value="cover1">
+        <input type="hidden" name="cover_selected" id="cover-selected-copy" value="cover1">
         <button type="submit" class="pay-now">Pay Now – R140</button>
       </form>
       <p class="checkout-note">Your payment details are entered directly on PayFast. This website does not store card details. Your download link appears after PayFast confirms payment.</p>
@@ -54,6 +55,7 @@
       option.classList.add('selected');
       option.setAttribute('aria-checked', 'true');
       document.getElementById('cover-selected').value = option.dataset.cover;
+      document.getElementById('cover-selected-copy').value = option.dataset.cover;
       document.getElementById('selected-cover-preview').src = option.dataset.image;
     });
   });

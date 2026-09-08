@@ -25,8 +25,19 @@
     document.getElementById('status').textContent = 'Payment confirmation could not be found. Please contact support with your PayFast reference.';
     return;
   }
-  link.href = 'download.php?payment_id=' + encodeURIComponent(paymentId);
-  link.classList.remove('disabled');
+  fetch('download.php?action=token&payment_id=' + encodeURIComponent(paymentId), { credentials: 'same-origin' })
+    .then(function (response) {
+      if (!response.ok) throw new Error('pending');
+      return response.json();
+    })
+    .then(function (data) {
+      link.href = 'download.php?token=' + encodeURIComponent(data.token);
+      link.classList.remove('disabled');
+      document.getElementById('status').textContent = 'Your payment was successful. Your secure download is ready.';
+    })
+    .catch(function () {
+      document.getElementById('status').textContent = 'Payment received. Your secure download will be ready shortly. Please refresh this page after PayFast confirms the payment.';
+    });
 }());
 </script>
 </body>
