@@ -237,6 +237,14 @@ a{color:inherit;text-decoration:none}
   .blog-preview-grid{grid-template-columns:1fr!important;gap:16px!important}
 }
 
+/* BLOG PREVIEW GRID - RESPONSIVE */
+@media(max-width:768px){
+  .blog-preview-grid{grid-template-columns:repeat(2,1fr)!important;gap:20px!important}
+}
+@media(max-width:480px){
+  .blog-preview-grid{grid-template-columns:1fr!important;gap:16px!important}
+}
+
 /* ═══ RESPONSIVE ═══ */
 @media(max-width:1024px){
   .hero-inner{gap:48px}
