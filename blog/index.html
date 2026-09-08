@@ -65,7 +65,7 @@
 
 <section class="blog-section">
   <div class="blog-inner">
-    <div class="blog-grid">
+    <div class="blog-grid" id="blog-grid">
 
       <a href="posts/the-pigeon-that-taught-me-about-resilience.html" class="blog-card">
         <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" alt="Pigeon on city street" class="blog-card-img" loading="lazy">
@@ -208,6 +208,11 @@
       </a>
 
     </div>
+    <nav class="blog-pagination" aria-label="Blog pagination">
+      <button type="button" id="previous-page" aria-label="Previous page">Previous</button>
+      <span class="blog-pagination-status" id="pagination-status" aria-live="polite">Page 1 of 2</span>
+      <button type="button" id="next-page" aria-label="Next page">Next</button>
+    </nav>
   </div>
 </section>
 
@@ -228,6 +233,10 @@
         <a href="../legal/terms.html">Terms</a>
         <a href="../legal/privacy.html">Privacy</a>
         <a href="../legal/cookies.html">Cookies</a>
+        <a href="../privacy.html">Privacy Policy</a>
+        <a href="../terms.html">Terms and Conditions</a>
+        <a href="../disclaimer.html">Disclaimers</a>
+        <a href="../popia.html">POPIA Policy</a>
       </div>
       <p class="footer-bottom-right"><a href="https://renaissance.liviyo.co.za">renaissance.liviyo.co.za</a></p>
     </div>
@@ -235,6 +244,43 @@
 </footer>
 
 <script>
+(function () {
+  var posts = [
+    { href: 'posts/the-pigeon-that-taught-me-about-resilience.html', image: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop', alt: 'Pigeon on city street', tag: 'Resilience', title: 'The Pigeon That Taught Me About Resilience', excerpt: 'A chance encounter with a pigeon at Park Station became a lesson in survival, faith, and the refusal to stay down.' },
+    { href: 'posts/what-the-bible-says-about-the-poor-soul.html', image: 'https://images.unsplash.com/photo-1504052434569-70ad5836ab65?w=600&h=400&fit=crop', alt: 'Open Bible pages', tag: 'Scripture', title: 'What the Bible Says About the Poor Soul', excerpt: 'From the Psalms to Lamentations, Scripture has always had a language for the broken, the weary, and the waiting.' },
+    { href: 'posts/the-renaissance-of-the-soul-a-biblical-journey.html', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=400&fit=crop', alt: 'Person walking path through forest', tag: 'Spiritual Journey', title: 'The Renaissance of the Soul – A Biblical Journey', excerpt: 'What does it mean for a soul to be renaissance? Not a return to glory, but a resurrection from the ashes.' },
+    { href: 'posts/the-spiritual-meaning-of-waiting.html', image: 'https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600&h=400&fit=crop', alt: 'Mountain landscape at dawn', tag: 'Patience', title: 'Waiting on the Lord – The Spiritual Discipline of Patience', excerpt: 'Waiting is not passive. It is the hardest kind of faith – believing when nothing is moving.' },
+    { href: 'posts/how-affliction-becomes-a-spiritual-teacher.html', image: 'https://images.unsplash.com/photo-1499209974431-9dddcece7f88?w=600&h=400&fit=crop', alt: 'Cracked earth with light', tag: 'Suffering', title: 'Affliction as a Spiritual Teacher', excerpt: 'Affliction does not come to destroy you. It comes to strip away everything that is not real.' },
+    { href: 'posts/difference-between-lost-soul-and-poor-soul.html', image: 'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=600&h=400&fit=crop', alt: 'Fork in the road', tag: 'Identity', title: 'The Lost Soul vs. The Poor Soul', excerpt: 'One is wandering. The other is waiting. Understanding the difference changes everything.' },
+    { href: 'posts/small-faithfulnesses-in-hard-times.html', image: 'https://images.unsplash.com/photo-1490730141103-6cac27aaab94?w=600&h=400&fit=crop', alt: 'Person holding small flame', tag: 'Faithfulness', title: 'Small Faithfulnesses in Hard Times', excerpt: 'You do not need to move mountains. You just need to show up today. That is the faithfulness that matters.' },
+    { href: 'posts/the-power-of-returning-teshuvah.html', image: 'https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=400&fit=crop', alt: 'Path through green valley', tag: 'Repentance', title: 'The Power of Returning (Teshuvah)', excerpt: 'Teshuvah is not about perfection. It is about direction. You can always turn back.' },
+    { href: 'posts/why-the-psalms-are-raw-and-real.html', image: 'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=600&h=400&fit=crop', alt: 'Ancient text close-up', tag: 'Psalms', title: 'Why the Psalms Are Raw and Real', excerpt: 'David did not clean up his prayers before sending them. He screamed, wept, and still believed.' },
+    { href: 'posts/overcoming-shame-and-reclaiming-identity.html', image: 'https://images.unsplash.com/photo-1516534775068-ba3e7458af70?w=600&h=400&fit=crop', alt: 'Person standing tall in light', tag: 'Identity', title: 'Overcoming Shame and Reclaiming Identity', excerpt: 'Shame says you are what you did. Grace says you are what God says you are.' },
+    { href: 'posts/finding-rest-when-you-are-exhausted.html', image: 'https://images.unsplash.com/photo-1505765050516-f72dcac9c60e?w=600&h=400&fit=crop', alt: 'Calm lake at sunset', tag: 'Rest', title: "Finding Rest When You're Exhausted", excerpt: 'Rest is not a reward for the strong. It is a promise for the weary.' },
+    { href: 'posts/your-renaissance-is-not-behind-you.html', image: 'https://images.unsplash.com/photo-1470252649378-9c29740a9fa8?w=600&h=400&fit=crop', alt: 'Sunrise over horizon', tag: 'Hope', title: 'Your Renaissance Is Not Behind You – It Is Ahead', excerpt: 'The best chapter of your story has not been written yet. Your renaissance is coming.' },
+    { href: 'posts/how-to-heal-from-repeated-failure.html', image: 'https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=600&h=400&fit=crop', alt: 'Dawn breaking over a mountain landscape', tag: 'Healing', title: 'How to Heal From Repeated Failure', excerpt: 'When failure keeps happening – job loss, relationship breakdown, financial collapse – the soul accumulates wounds. A raw exploration of healing.' },
+    { href: 'posts/what-is-the-renaissance-of-the-poor-soul.html', image: 'https://images.unsplash.com/photo-1476820865390-c52aeebb9891?w=600&h=400&fit=crop', alt: 'Golden sunrise sky signifying rebirth', tag: 'Meaning', title: 'What Is the Renaissance of the Poor Soul?', excerpt: "Explore the spiritual condition of the poor soul and the five soul types in Halalisani Ngema's debut memoir." }
+  ];
+  var postsPerPage = 12;
+  var currentPage = 1;
+  var totalPages = Math.ceil(posts.length / postsPerPage);
+  var grid = document.getElementById('blog-grid');
+  var status = document.getElementById('pagination-status');
+  var previous = document.getElementById('previous-page');
+  var next = document.getElementById('next-page');
+  function renderPage() {
+    var start = (currentPage - 1) * postsPerPage;
+    grid.innerHTML = posts.slice(start, start + postsPerPage).map(function (post) {
+      return '<a href="' + post.href + '" class="blog-card"><img src="' + post.image + '" alt="' + post.alt + '" class="blog-card-img" loading="lazy" width="600" height="400"><div class="blog-card-body"><p class="blog-card-tag">' + post.tag + '</p><h2 class="blog-card-title">' + post.title + '</h2><p class="blog-card-excerpt">' + post.excerpt + '</p><span class="blog-card-link">Read More <span aria-hidden="true">→</span></span></div></a>';
+    }).join('');
+    status.textContent = 'Page ' + currentPage + ' of ' + totalPages;
+    previous.disabled = currentPage === 1;
+    next.disabled = currentPage === totalPages;
+  }
+  previous.addEventListener('click', function () { if (currentPage > 1) { currentPage -= 1; renderPage(); window.scrollTo({ top: document.querySelector('.blog-section').offsetTop - 80, behavior: 'smooth' }); } });
+  next.addEventListener('click', function () { if (currentPage < totalPages) { currentPage += 1; renderPage(); window.scrollTo({ top: document.querySelector('.blog-section').offsetTop - 80, behavior: 'smooth' }); } });
+  renderPage();
+}());
 (function(){var t=document.getElementById('navToggle'),l=document.getElementById('navLinks');if(t&&l){t.addEventListener('click',function(){var o=l.classList.toggle('active');t.setAttribute('aria-expanded',o)});l.querySelectorAll('a').forEach(function(a){a.addEventListener('click',function(){l.classList.remove('active');t.setAttribute('aria-expanded','false')})})}})();
 </script>
 </body>
