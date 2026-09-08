@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Thank You – Renaissance of the Poor Soul</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.success{max-width:680px;margin:0 auto;padding:160px 24px 100px;text-align:center}.success h1{font:600 2.8rem/1.1 var(--font-serif);color:var(--navy);margin:16px 0}.success p{color:var(--muted);margin-bottom:28px}.download-button{display:inline-flex;padding:15px 28px;border-radius:8px;background:var(--gold);color:var(--navy);font-weight:600}.download-button.disabled{opacity:.55;pointer-events:none}.checkout-note{font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:18px}
+</style>
+</head>
+<body>
+<main class="success">
+  <p class="section-eyebrow" style="justify-content:center">Payment confirmation</p>
+  <h1>Thank you for your purchase!</h1>
+  <p id="status">Your payment was successful. Your secure download is being prepared.</p>
+  <a id="download" class="download-button disabled" href="#">Download your book</a>
+  <p class="checkout-note">The download becomes available after PayFast confirms the payment. Please keep this page open for a moment.</p>
+</main>
+<script>
+(function () {
+  var paymentId = new URLSearchParams(window.location.search).get('m_payment_id');
+  var link = document.getElementById('download');
+  if (!paymentId || !/^[a-zA-Z0-9-]{8,80}$/.test(paymentId)) {
+    document.getElementById('status').textContent = 'Payment confirmation could not be found. Please contact support with your PayFast reference.';
+    return;
+  }
+  link.href = 'download.php?payment_id=' + encodeURIComponent(paymentId);
+  link.classList.remove('disabled');
+}());
+</script>
+</body>
+</html>
