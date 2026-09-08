@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Secure Checkout – Renaissance of the Poor Soul</title>
+<link rel="stylesheet" href="assets/css/style.css">
+<style>
+.checkout{max-width:980px;margin:0 auto;padding:130px 24px 80px}.checkout-grid{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:start}.checkout-cover{width:100%;border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,.2)}.checkout-panel{background:#fff;border:1px solid rgba(30,30,30,.08);border-radius:12px;padding:32px}.checkout-panel h1{font-family:var(--font-serif);font-size:2.3rem;line-height:1.1;color:var(--navy);margin-bottom:10px}.checkout-price{font-family:var(--font-serif);font-size:1.6rem;color:var(--gold-dim);margin:18px 0}.cover-options{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:24px 0}.cover-option{padding:5px;background:var(--cream);border:2px solid transparent;border-radius:7px;cursor:pointer}.cover-option.selected{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,169,78,.18)}.cover-option img{aspect-ratio:2/3;object-fit:cover;border-radius:3px}.cover-option span{display:block;font-size:.72rem;text-align:center;margin-top:4px;color:var(--muted)}.secure-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(36,111,74,.25);border-radius:6px;color:#246f4a;font-size:.8rem;margin:4px 0 22px}.pay-now{width:100%;padding:15px;border:0;border-radius:8px;background:var(--gold);color:var(--navy);font:600 .95rem var(--font-sans);cursor:pointer}.pay-now:hover{background:var(--gold-dim)}.checkout-note{font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:18px}@media(max-width:700px){.checkout-grid{grid-template-columns:1fr}.checkout-cover{max-width:220px;margin:auto}.checkout-panel h1{font-size:1.9rem}.cover-options{gap:6px}}
+</style>
+</head>
+<body>
+<main class="checkout">
+  <div class="checkout-grid">
+    <img id="selected-cover-preview" class="checkout-cover" src="assets/images/cover.jpg" alt="Renaissance of the Poor Soul book cover">
+    <section class="checkout-panel" aria-labelledby="checkout-title">
+      <p class="section-eyebrow">Secure checkout</p>
+      <h1 id="checkout-title">Renaissance of the Poor Soul</h1>
+      <p>Digital edition by Halalisani Ngema</p>
+      <p class="checkout-price">R140.00 ZAR</p>
+      <div class="secure-badge" aria-label="Secure checkout, SSL encrypted">&#128274; Secure checkout – SSL encrypted</div>
+      <form action="https://www.payfast.co.za/eng/process" method="post" id="payfast-form">
+        <p><strong>Choose your cover</strong></p>
+        <div class="cover-options" role="radiogroup" aria-label="Choose your cover">
+          <button type="button" class="cover-option selected" data-cover="cover1" data-image="assets/images/cover.jpg" role="radio" aria-checked="true"><img src="assets/images/cover.jpg" alt="Cover 1"><span>Cover 1</span></button>
+          <button type="button" class="cover-option" data-cover="cover2" data-image="assets/direct_book/thumbnails/cover2.jpg" role="radio" aria-checked="false"><img src="assets/direct_book/thumbnails/cover2.jpg" alt="Cover 2"><span>Cover 2</span></button>
+          <button type="button" class="cover-option" data-cover="cover3" data-image="assets/direct_book/thumbnails/cover3.jpg" role="radio" aria-checked="false"><img src="assets/direct_book/thumbnails/cover3.jpg" alt="Cover 3"><span>Cover 3</span></button>
+          <button type="button" class="cover-option" data-cover="cover4" data-image="assets/direct_book/thumbnails/cover4.jpg" role="radio" aria-checked="false"><img src="assets/direct_book/thumbnails/cover4.jpg" alt="Cover 4"><span>Cover 4</span></button>
+          <button type="button" class="cover-option" data-cover="cover5" data-image="assets/direct_book/thumbnails/cover5.jpg" role="radio" aria-checked="false"><img src="assets/direct_book/thumbnails/cover5.jpg" alt="Cover 5"><span>Cover 5</span></button>
+        </div>
+        <input type="hidden" name="merchant_id" value="34944543">
+        <input type="hidden" name="merchant_key" value="hg2amrkziqu6v">
+        <input type="hidden" name="amount" value="140.00">
+        <input type="hidden" name="item_name" value="Renaissance of the Poor Soul">
+        <input type="hidden" name="currency" value="ZAR">
+        <input type="hidden" name="return_url" value="https://renaissance.liviyo.co.za/success.html">
+        <input type="hidden" name="cancel_url" value="https://renaissance.liviyo.co.za/">
+        <input type="hidden" name="notify_url" value="https://renaissance.liviyo.co.za/notify.php">
+        <input type="hidden" name="m_payment_id" id="payment-id">
+        <input type="hidden" name="custom_str1" id="cover-selected" value="cover1">
+        <button type="submit" class="pay-now">Pay Now – R140</button>
+      </form>
+      <p class="checkout-note">Your payment details are entered directly on PayFast. This website does not store card details. Your download link appears after PayFast confirms payment.</p>
+    </section>
+  </div>
+</main>
+<script>
+(function () {
+  var id = window.crypto && window.crypto.randomUUID ? window.crypto.randomUUID() : String(Date.now()) + '-' + Math.random().toString(36).slice(2);
+  document.getElementById('payment-id').value = id;
+  document.querySelectorAll('.cover-option').forEach(function (option) {
+    option.addEventListener('click', function () {
+      document.querySelectorAll('.cover-option').forEach(function (item) { item.classList.remove('selected'); item.setAttribute('aria-checked', 'false'); });
+      option.classList.add('selected');
+      option.setAttribute('aria-checked', 'true');
+      document.getElementById('cover-selected').value = option.dataset.cover;
+      document.getElementById('selected-cover-preview').src = option.dataset.image;
+    });
+  });
+}());
+</script>
+</body>
+</html>
