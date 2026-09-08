@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><package xmlns="http://www.idpf.org/2007/opf" unique-identifier="uid" version="3.0">
+  <metadata xmlns:dc="http://purl.org/dc/elements/1.1/">
+    <dc:identifier id="uid">2b1dde96-e2d0-40a7-8797-832ec4161aea</dc:identifier>
+    <dc:language>en</dc:language>
+    <dc:title>Renaissance of the Poor Soul.docx</dc:title>
+    <meta property="dcterms:modified">2026-03-13T06:37:26Z</meta>
+  </metadata>
+  <manifest>
+    <item href="nav.xhtml" id="toc" media-type="application/xhtml+xml" properties="nav"/>
+    <item href="RenaissanceofthePoorSoul.docx.xhtml" id="main" media-type="application/xhtml+xml"/>
+  </manifest>
+  <spine>
+    <itemref idref="main"/>
+  </spine>
+</package>
