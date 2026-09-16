@@ -9,6 +9,7 @@
 <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+  <a href="#main" class="skip-link">Skip to content</a>
 <nav class="nav" role="navigation" aria-label="Main navigation">
   <div class="nav-inner">
     <a href="index.html" class="nav-brand">Renaissance of the Poor Soul</a>
@@ -27,7 +28,7 @@
     <p>How we handle personal information in South Africa.</p>
   </div>
 </section>
-<main class="legal">
+<main class="legal" id="main">
   <div class="legal-inner">
     <p class="updated">Last updated: 8 September 2026</p>
     <h2>Responsible party</h2>
@@ -66,5 +67,14 @@
     </div>
   </div>
 </footer>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<script>
+  (function(){var sp=document.getElementById('scrollProgress'),st=document.getElementById('scrollTop');if(!sp||!st)return;window.addEventListener('scroll',function(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=h.scrollHeight-h.clientHeight;sp.style.width=(mx>0?(sc/mx*100):0)+'%';st.classList.toggle('visible',sc>400);},{passive:true});})();
+</script>
+
 </body>
 </html>

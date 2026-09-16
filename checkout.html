@@ -7,10 +7,22 @@
 <link rel="stylesheet" href="assets/css/style.css">
 <style>
 .checkout{max-width:980px;margin:0 auto;padding:130px 24px 80px}.checkout-grid{display:grid;grid-template-columns:280px 1fr;gap:40px;align-items:start}.checkout-cover{width:100%;border-radius:8px;box-shadow:0 18px 40px rgba(0,0,0,.2)}.checkout-panel{background:#fff;border:1px solid rgba(30,30,30,.08);border-radius:12px;padding:32px}.checkout-panel h1{font-family:var(--font-serif);font-size:2.3rem;line-height:1.1;color:var(--navy);margin-bottom:10px}.checkout-price{font-family:var(--font-serif);font-size:1.6rem;color:var(--gold-dim);margin:18px 0}.cover-options{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:24px 0}.cover-option{padding:5px;background:var(--cream);border:2px solid transparent;border-radius:7px;cursor:pointer}.cover-option.selected{border-color:var(--gold);box-shadow:0 0 0 2px rgba(201,169,78,.18)}.cover-option img{aspect-ratio:2/3;object-fit:cover;border-radius:3px}.cover-option span{display:block;font-size:.72rem;text-align:center;margin-top:4px;color:var(--muted)}.secure-badge{display:inline-flex;align-items:center;gap:8px;padding:8px 12px;border:1px solid rgba(36,111,74,.25);border-radius:6px;color:#246f4a;font-size:.8rem;margin:4px 0 22px}.pay-now{width:100%;padding:15px;border:0;border-radius:8px;background:var(--gold);color:var(--navy);font:600 .95rem var(--font-sans);cursor:pointer}.pay-now:hover{background:var(--gold-dim)}.checkout-note{font-size:.8rem;color:var(--muted);line-height:1.6;margin-top:18px}@media(max-width:700px){.checkout-grid{grid-template-columns:1fr}.checkout-cover{max-width:220px;margin:auto}.checkout-panel h1{font-size:1.9rem}.cover-options{gap:6px}}
-</style>
+
+/* Batch 1 — Skip Link, Scroll Progress, Scroll Top */
+.skip-link{position:absolute;top:-100%;left:16px;padding:8px 16px;background:var(--gold,#c9a94e);color:var(--navy,#0a1628);font-family:var(--font-sans,'Inter',sans-serif);font-size:.85rem;font-weight:600;z-index:9999;border-radius:2px;transition:top .2s}
+.skip-link:focus{top:8px;outline-offset:2px}
+.scroll-progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--gold,#c9a94e);z-index:1000;transition:width .1s linear}
+.scroll-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border:1px solid rgba(201,169,78,.4);border-radius:50%;background:var(--cream,#f8f6f0);color:var(--gold,#c9a94e);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s,visibility .3s,transform .3s,background .25s,border-color .25s;z-index:950;box-shadow:0 4px 12px rgba(10,22,40,.12)}
+.scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.scroll-top:hover{background:var(--gold,#c9a94e);color:var(--navy,#0a1628);border-color:var(--gold,#c9a94e)}
+.scroll-top svg{width:16px;height:16px}
+@media(max-width:900px){.scroll-top{bottom:16px;right:16px;width:40px;height:40px}}
+
+  </style>
 </head>
 <body>
-<main class="checkout">
+  <a href="#main" class="skip-link">Skip to content</a>
+<main class="checkout" id="main">
   <div class="checkout-grid">
     <img id="selected-cover-preview" class="checkout-cover" src="assets/direct_book/thumbnails/cover1.png" alt="Renaissance of the Poor Soul book cover, Cover 1">
     <section class="checkout-panel" aria-labelledby="checkout-title">
@@ -75,5 +87,14 @@
   });
 }());
 </script>
+
+<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+<button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+<script>
+  (function(){var sp=document.getElementById('scrollProgress'),st=document.getElementById('scrollTop');if(!sp||!st)return;window.addEventListener('scroll',function(){var h=document.documentElement,sc=h.scrollTop||document.body.scrollTop,mx=h.scrollHeight-h.clientHeight;sp.style.width=(mx>0?(sc/mx*100):0)+'%';st.classList.toggle('visible',sc>400);},{passive:true});})();
+</script>
+
 </body>
 </html>

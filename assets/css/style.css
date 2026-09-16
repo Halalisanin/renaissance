@@ -125,3 +125,14 @@ a{color:inherit;text-decoration:none}
   .footer-top{flex-direction:column}
   .footer-bottom{flex-direction:column;text-align:center}
 }
+/* ============================================
+   Batch 1 — Skip Link, Scroll Progress, Scroll Top
+   ============================================ */
+.skip-link{position:absolute;top:-100%;left:16px;padding:8px 16px;background:var(--gold);color:var(--navy);font-family:var(--font-sans);font-size:.85rem;font-weight:600;z-index:9999;border-radius:2px;transition:top .2s}
+.skip-link:focus{top:8px;outline-offset:2px}
+.scroll-progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--gold);z-index:1000;transition:width .1s linear}
+.scroll-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border:1px solid rgba(201,169,78,.4);border-radius:50%;background:var(--cream);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .3s,visibility .3s,transform .3s,background .25s,border-color .25s;z-index:950;box-shadow:0 4px 12px rgba(10,22,40,.12)}
+.scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.scroll-top:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+.scroll-top svg{width:16px;height:16px}
+@media(max-width:900px){.scroll-top{bottom:16px;right:16px;width:40px;height:40px}}
