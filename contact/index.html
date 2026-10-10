@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Contact - Renaissance of the Poor Soul</title>
+<meta name="description" content="Get in touch with Renaissance of the Poor Soul.">
+<link rel="canonical" href="https://renaissance.liviyo.co.za/contact/">
+<meta property="og:title" content="Contact - Renaissance of the Poor Soul">
+<meta property="og:description" content="Get in touch with Renaissance of the Poor Soul.">
+<meta property="og:type" content="website">
+<meta property="og:url" href="https://renaissance.liviyo.co.za/contact/">
+<meta property="og:site_name" content="Renaissance of the Poor Soul">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="/favicon.ico" sizes="32x32">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --navy:#0a1628;
+  --navy-mid:#0f1f38;
+  --navy-light:#162a4a;
+  --gold:#c9a94e;
+  --gold-dim:#b89535;
+  --gold-glow:rgba(201,169,78,.15);
+  --cream:#f8f6f0;
+  --cream-2:#f0ece2;
+  --cream-3:#e8e2d4;
+  --ink:#1e1e1e;
+  --ink-soft:#3a3a3a;
+  --muted:#6b6560;
+  --muted-light:#8a8279;
+  --font-serif:"Cormorant Garamond","Georgia","Times New Roman",serif;
+  --font-sans:"Inter","Helvetica Neue",Arial,sans-serif;
+  --max-w:1200px;
+  --text-w:700px;
+}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{font-family:var(--font-sans);color:var(--ink);background:var(--cream);line-height:1.7;-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;font-size:16px}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit;text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;transition:background .4s,border-color .4s,box-shadow .4s;background:transparent;border-bottom:1px solid transparent}
+.nav.scrolled{background:rgba(10,22,40,.96);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(201,169,78,.1);box-shadow:0 2px 40px rgba(0,0,0,.3)}
+.nav-inner{max-width:var(--max-w);margin:0 auto;padding:0 24px;height:76px;display:flex;align-items:center;justify-content:space-between}
+.nav-brand{display:flex;align-items:center;font-family:var(--font-serif);font-weight:600;font-size:1.05rem;color:var(--cream);letter-spacing:.01em;transition:color .3s}
+.nav-brand:hover{color:var(--gold)}
+.nav-links{display:flex;align-items:center;gap:36px}
+.nav-links a{font-size:.875rem;font-weight:500;color:rgba(248,246,240,.6);transition:color .3s}
+.nav-links a:hover{color:var(--cream)}
+.nav-links a.active{color:var(--gold)}
+.nav-mobile-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px}
+.nav-mobile-toggle span{display:block;width:22px;height:2px;background:var(--cream);margin:5px 0;transition:transform .3s,opacity .3s}
+
+/* PAGE HERO */
+.page-hero{padding:160px 24px 80px;background:var(--navy);text-align:center;position:relative;overflow:hidden}
+.page-hero::before{content:'';position:absolute;inset:0;background:linear-gradient(160deg,var(--navy) 0%,var(--navy-mid) 40%,var(--navy-light) 100%);pointer-events:none}
+.page-hero::after{content:'';position:absolute;top:-200px;right:-200px;width:600px;height:600px;background:radial-gradient(circle,rgba(201,169,78,.08) 0%,transparent 65%);pointer-events:none}
+.page-hero-inner{position:relative;z-index:1}
+.page-hero h1{font-family:var(--font-serif);font-size:clamp(2.5rem,5vw,3.5rem);font-weight:600;color:var(--cream);margin-bottom:16px}
+.page-hero p{font-size:1.1rem;color:rgba(248,246,240,.6);max-width:520px;margin:0 auto}
+
+/* CONTACT SECTION */
+.contact-section{padding:80px 24px 100px}
+.contact-grid{max-width:var(--text-w);margin:0 auto;display:grid;grid-template-columns:1fr;gap:48px}
+.contact-form-wrapper{background:var(--cream-2);border:1px solid var(--cream-3);border-radius:12px;padding:40px;box-shadow:0 4px 24px rgba(0,0,0,.04)}
+.contact-form-wrapper h2{font-family:var(--font-serif);font-size:1.75rem;font-weight:600;color:var(--navy);margin-bottom:8px}
+.contact-form-wrapper>.form-desc{color:var(--muted);font-size:.95rem;margin-bottom:32px}
+.form-group{margin-bottom:24px}
+.form-group label{display:block;font-size:.85rem;font-weight:600;color:var(--ink);margin-bottom:8px}
+.form-group input,.form-group textarea{
+  width:100%;padding:14px 16px;border:1px solid var(--cream-3);border-radius:8px;
+  font-family:var(--font-sans);font-size:.95rem;color:var(--ink);background:#fff;
+  transition:border-color .25s,box-shadow .25s;
+}
+.form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--gold);box-shadow:0 0 0 3px var(--gold-glow)}
+.form-group textarea{min-height:140px;resize:vertical}
+.btn-gold{display:inline-flex;align-items:center;justify-content:center;padding:16px 36px;background:var(--gold);color:var(--navy);font-family:var(--font-sans);font-weight:600;font-size:.95rem;border-radius:8px;border:none;cursor:pointer;transition:background .3s,transform .2s,box-shadow .3s;box-shadow:0 4px 24px rgba(201,169,78,.25)}
+.btn-gold:hover{background:var(--gold-dim);transform:translateY(-2px);box-shadow:0 8px 40px rgba(201,169,78,.35)}
+.btn-gold:disabled{opacity:.6;cursor:not-allowed;transform:none}
+.form-status{display:none;padding:16px 20px;border-radius:8px;font-size:.9rem;font-weight:500;margin-bottom:24px}
+.form-status.success{display:block;background:#e8f5e9;color:#2e7d32;border:1px solid #a5d6a7}
+.form-status.error{display:block;background:#ffebee;color:#c62828;border:1px solid #ef9a9a}
+
+/* CONTACT INFO */
+.contact-info h3{font-family:var(--font-serif);font-size:1.25rem;font-weight:600;color:var(--navy);margin-bottom:12px}
+.contact-info p{color:var(--muted);font-size:.95rem;margin-bottom:12px}
+.contact-info a{color:var(--gold);font-weight:500}
+.contact-info a:hover{text-decoration:underline}
+
+/* FOOTER */
+.footer{background:var(--navy);padding:60px 24px 40px;color:rgba(248,246,240,.5)}
+.footer-inner{max-width:var(--max-w);margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:24px}
+.footer-brand{font-family:var(--font-serif);font-size:1.1rem;font-weight:600;color:var(--cream)}
+.footer-links{display:flex;gap:24px}
+.footer-links a{font-size:.85rem;color:rgba(248,246,240,.5);transition:color .3s}
+.footer-links a:hover{color:var(--gold)}
+.footer-copy{font-size:.8rem;color:rgba(248,246,240,.3)}
+
+/* SCROLL PROGRESS */
+.scroll-progress{position:fixed;top:0;left:0;height:2px;width:0;background:var(--gold);z-index:1000;transition:width .1s linear}
+.scroll-top{position:fixed;bottom:24px;right:24px;width:44px;height:44px;border:1px solid rgba(201,169,78,.3);border-radius:50%;background:var(--navy);color:var(--gold);display:flex;align-items:center;justify-content:center;cursor:pointer;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .25s,visibility .25s,transform .25s;z-index:950}
+.scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
+.scroll-top:hover{background:var(--gold);color:var(--navy)}
+.scroll-top svg{width:18px;height:18px}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav-links{display:none}
+  .nav-mobile-toggle{display:block}
+  .contact-form-wrapper{padding:28px}
+  .footer-inner{flex-direction:column;text-align:center}
+}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="/" class="nav-brand">Renaissance of the Poor Soul</a>
+    <div class="nav-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/contact/" class="active">Contact</a>
+    </div>
+    <button class="nav-mobile-toggle" aria-label="Toggle menu" onclick="document.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<section class="page-hero">
+  <div class="page-hero-inner">
+    <h1>Get in Touch</h1>
+    <p>Have a question or want to work together? Drop us a message.</p>
+  </div>
+</section>
+
+<section class="contact-section">
+  <div class="contact-grid">
+    <div class="contact-form-wrapper">
+      <h2>Send a Message</h2>
+      <p class="form-desc">Fill in the form below and we'll get back to you shortly.</p>
+      <div id="form-status" class="form-status" role="status"></div>
+      <form id="contact-form" action="/contact.php" method="POST" novalidate>
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" placeholder="How can we help?" required></textarea>
+        </div>
+        <button type="submit" class="btn-gold" id="submit-btn">Send Message</button>
+      </form>
+    </div>
+    <div class="contact-info">
+      <h3>Other Ways to Reach Us</h3>
+      <p>Email us directly at <a href="mailto:info@liviyo.co.za">info@liviyo.co.za</a></p>
+      <p>We read every message and aim to reply within 1-2 business days.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="footer-inner">
+    <div class="footer-brand">Renaissance of the Poor Soul</div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/about.html">About</a>
+      <a href="/blog.html">Blog</a>
+      <a href="/contact/">Contact</a>
+    </div>
+    <div class="footer-copy">&copy; 2026 Renaissance of the Poor Soul. All rights reserved.</div>
+  </div>
+</footer>
+
+<div class="scroll-progress" id="scrollProgress"></div>
+<button class="scroll-top" id="scrollTop" aria-label="Back to top" onclick="window.scrollTo({top:0,behavior:'smooth'})">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
+
+<script>
+  // Nav scroll effect
+  const nav = document.getElementById('nav');
+  const scrollProgress = document.getElementById('scrollProgress');
+  const scrollTop = document.getElementById('scrollTop');
+  window.addEventListener('scroll', () => {
+    const sc = window.scrollY;
+    nav.classList.toggle('scrolled', sc > 50);
+    const h = document.documentElement;
+    const max = h.scrollHeight - h.clientHeight;
+    scrollProgress.style.width = max > 0 ? (sc / max * 100) + '%' : '0%';
+    scrollTop.classList.toggle('visible', sc > 400);
+  }, { passive: true });
+
+  // Contact form submission
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('form-status');
+  const btn = document.getElementById('submit-btn');
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    status.className = 'form-status';
+    status.textContent = '';
+
+    const name = document.getElementById('name').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const message = document.getElementById('message').value.trim();
+
+    if (!name || !email || !message) {
+      status.className = 'form-status error';
+      status.textContent = 'Please fill in all required fields.';
+      return;
+    }
+    if (!email.includes('@') || !email.includes('.')) {
+      status.className = 'form-status error';
+      status.textContent = 'Please enter a valid email address.';
+      return;
+    }
+
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(form);
+      const res = await fetch('/contact.php', { method: 'POST', body: formData });
+      const data = await res.json();
+
+      if (res.ok && data && data.received) {
+        status.className = 'form-status success';
+        status.textContent = 'Thank you! Your message has been sent. We\'ll get back to you shortly.';
+        form.reset();
+      } else {
+        throw new Error(data.error || 'Submission failed');
+      }
+    } catch (err) {
+      status.className = 'form-status error';
+      status.textContent = 'Something went wrong. Please try again or email us directly at info@liviyo.co.za.';
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Send Message';
+    }
+  });
+</script>
+
+</body>
+</html>
