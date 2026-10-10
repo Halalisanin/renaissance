@@ -20,3 +20,4 @@ __pycache__/
 # Tooling / temp
 .DS_Store
 *.log
+test-payment.php
